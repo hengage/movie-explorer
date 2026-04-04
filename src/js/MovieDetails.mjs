@@ -1,0 +1,111 @@
+import { formatDate, formatRating, formatRuntime, renderErrorState, renderLoadingState } from './utils.js';
+
+export default class MovieDetails {
+  constructor(container, api, movieId) {
+    this.container = container;
+    this.api = api;
+    this.movieId = movieId;
+  }
+
+  async init() {
+    if (!this.movieId) {
+      renderErrorState(this.container, 'We could not tell which movie you wanted. Please return and select one again.');
+      return;
+    }
+
+    renderLoadingState(this.container, 'Loading movie details...');
+
+    try {
+      const movie = await this.api.getMovieDetails(this.movieId);
+      document.title = `Movie Explorer | ${movie.title}`;
+      this.render(movie);
+    } catch (error) {
+      renderErrorState(this.container, error.message);
+    }
+  }
+
+  render(movie) {
+    const title = movie.title || 'Untitled movie';
+    const poster = this.api.buildPosterUrl(movie.poster_path, 'w780');
+    const backdrop = this.api.buildBackdropUrl(movie.backdrop_path);
+    const genres = movie.genres?.length
+      ? movie.genres.map((genre) => `<span class="detail-chip">${genre.name}</span>`).join('')
+      : '<span class="detail-chip">Genre info coming soon</span>';
+
+    this.container.innerHTML = `
+      <section class="overflow-hidden rounded-[2rem] border border-white/10 bg-cinema-panel shadow-2xl shadow-black/30">
+        <div class="relative min-h-72 border-b border-white/10 bg-cinema-soft">
+          <img src="${backdrop}" alt="Backdrop for ${title}" class="absolute inset-0 h-full w-full object-cover opacity-25" />
+          <div class="absolute inset-0 bg-gradient-to-t from-cinema-panel via-cinema-panel/85 to-black/20"></div>
+          <div class="relative flex h-full items-end px-6 py-10 sm:px-10">
+            <div>
+              <p class="section-kicker">Movie detail</p>
+              <h1 class="mt-3 max-w-4xl font-display text-5xl uppercase leading-none tracking-[0.08em] sm:text-6xl">${title}</h1>
+              <p class="mt-4 max-w-3xl text-cinema-muted">${movie.tagline || 'Everything you need to decide if this should be your next watch.'}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-8 p-6 lg:grid-cols-[320px_1fr] lg:p-10">
+          <div class="detail-panel self-start">
+            <div class="overflow-hidden rounded-[1.5rem] bg-cinema-soft">
+              <img src="${poster}" alt="Poster for ${title}" class="aspect-[2/3] w-full object-cover" />
+            </div>
+            <div class="mt-5 flex flex-wrap gap-3">
+              <span class="detail-chip">Rating ${formatRating(movie.vote_average)}</span>
+              <span class="detail-chip">${formatRuntime(movie.runtime)}</span>
+            </div>
+          </div>
+
+          <div class="space-y-8">
+            <section class="detail-panel">
+              <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <div>
+                  <p class="text-sm uppercase tracking-[0.18em] text-cinema-muted">Release Date</p>
+                  <p class="mt-2 text-lg font-semibold">${formatDate(movie.release_date)}</p>
+                </div>
+                <div>
+                  <p class="text-sm uppercase tracking-[0.18em] text-cinema-muted">Language</p>
+                  <p class="mt-2 text-lg font-semibold">${movie.original_language?.toUpperCase() || 'N/A'}</p>
+                </div>
+                <div>
+                  <p class="text-sm uppercase tracking-[0.18em] text-cinema-muted">Popularity</p>
+                  <p class="mt-2 text-lg font-semibold">${formatRating(movie.popularity)}</p>
+                </div>
+                <div>
+                  <p class="text-sm uppercase tracking-[0.18em] text-cinema-muted">Vote Count</p>
+                  <p class="mt-2 text-lg font-semibold">${movie.vote_count || 0}</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="detail-panel">
+              <h2 class="subsection-title">Overview</h2>
+              <p class="mt-4 max-w-4xl text-lg leading-8 text-cinema-muted">${movie.overview || 'An overview for this movie is not available yet.'}</p>
+            </section>
+
+            <section class="detail-panel">
+              <h2 class="subsection-title">Genres</h2>
+              <div class="mt-4 flex flex-wrap gap-3">${genres}</div>
+            </section>
+
+            <section class="grid gap-6 xl:grid-cols-3">
+              <div class="detail-panel">
+                <h2 class="subsection-title">Cast</h2>
+                <p class="mt-4 text-cinema-muted">Top cast display lands in Week 6. This section is reserved and wired into the detail page layout.</p>
+              </div>
+              <div class="detail-panel">
+                <h2 class="subsection-title">Trailer</h2>
+                <p class="mt-4 text-cinema-muted">Trailer playback is planned for Week 6 after the YouTube integration step.</p>
+              </div>
+              <div class="detail-panel">
+                <h2 class="subsection-title">Similar Movies</h2>
+                <p class="mt-4 text-cinema-muted">Related movie recommendations are planned next after the Week 5 foundation is stable.</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+}
