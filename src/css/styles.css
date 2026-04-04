@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-cinema-bg: #111318;
+  --color-cinema-panel: #181c24;
+  --color-cinema-soft: #202531;
+  --color-cinema-accent: #d4a24c;
+  --color-cinema-danger: #c44536;
+  --color-cinema-muted: #9aa3b2;
+  --color-cinema-text: #f4f7fb;
+  --color-cinema-success: #4caf50;
+  --font-display: "Oswald", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-cinema-bg text-cinema-text font-sans antialiased;
+    background-image:
+      radial-gradient(circle at top, rgba(212, 162, 76, 0.14), transparent 28%),
+      linear-gradient(180deg, rgba(24, 28, 36, 0.6), rgba(17, 19, 24, 1));
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto max-w-7xl px-6;
+  }
+
+  .section-heading-wrap {
+    @apply flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between;
+  }
+
+  .section-kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.35em] text-cinema-accent;
+  }
+
+  .section-heading {
+    @apply font-display text-4xl uppercase tracking-[0.12em] sm:text-5xl;
+  }
+
+  .section-link {
+    @apply text-sm font-semibold uppercase tracking-[0.18em] text-cinema-muted transition hover:text-cinema-text;
+  }
+
+  .search-input {
+    @apply rounded-full border border-white/10 bg-white/5 px-5 py-3.5 text-base text-cinema-text outline-none ring-0 placeholder:text-cinema-muted/70 focus:border-cinema-accent focus:bg-white/8;
+  }
+
+  .primary-button {
+    @apply rounded-full bg-cinema-accent px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-cinema-bg transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cinema-accent/20;
+  }
+
+  .state-card {
+    @apply rounded-3xl border border-white/10 bg-cinema-panel/80 px-6 py-10 text-center text-cinema-muted shadow-xl shadow-black/20;
+  }
+
+  .movie-row {
+    @apply flex gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+  }
+
+  .movie-grid {
+    @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+
+  .movie-card {
+    @apply relative w-[18rem] shrink-0 overflow-hidden rounded-[1.25rem] border border-white/8 bg-cinema-panel shadow-xl shadow-black/20 transition duration-300 hover:-translate-y-1.5 hover:scale-[1.02] hover:border-cinema-accent/40;
+  }
+
+  .movie-card-grid {
+    @apply w-full;
+  }
+
+  .movie-poster-wrap {
+    @apply relative aspect-[2/3] overflow-hidden bg-cinema-soft;
+  }
+
+  .movie-poster {
+    @apply h-full w-full object-cover;
+  }
+
+  .rating-badge {
+    @apply absolute right-3 top-3 inline-flex h-12 w-12 items-center justify-center rounded-full border border-cinema-accent/40 bg-black/75 font-display text-sm tracking-[0.08em] text-cinema-accent backdrop-blur;
+  }
+
+  .movie-card-body {
+    @apply flex min-h-36 flex-col gap-3 p-5;
+  }
+
+  .movie-card-title {
+    @apply line-clamp-2 font-display text-2xl uppercase leading-tight tracking-[0.08em];
+  }
+
+  .movie-card-meta {
+    @apply text-sm text-cinema-muted;
+  }
+
+  .detail-panel {
+    @apply rounded-[2rem] border border-white/10 bg-cinema-panel/85 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm;
+  }
+
+  .detail-chip {
+    @apply rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-cinema-muted;
+  }
+
+  .subsection-title {
+    @apply font-display text-2xl uppercase tracking-[0.12em];
+  }
+}
+

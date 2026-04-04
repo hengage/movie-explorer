@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Explorer | Search</title>
+    <meta name="description" content="Search Movie Explorer and compare matching movie results." />
+    <link rel="stylesheet" href="/src/css/styles.css" />
+    <script type="module" src="/src/js/search.js"></script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-cinema-bg text-cinema-text">
+      <header class="border-b border-white/10 bg-black/30 backdrop-blur-sm">
+        <div class="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 md:flex-row md:items-center md:justify-between">
+          <a href="/index.html" class="font-display text-3xl uppercase tracking-[0.2em] text-cinema-accent">
+            Movie Explorer
+          </a>
+          <form id="search-form" class="flex w-full max-w-3xl flex-col gap-3 sm:flex-row">
+            <label class="sr-only" for="query">Search for a movie</label>
+            <input id="query" name="query" type="search" placeholder="Search by movie title" class="search-input w-full sm:flex-1" required />
+            <button type="submit" class="primary-button sm:min-w-40">Search</button>
+          </form>
+        </div>
+      </header>
+
+      <main class="page-shell py-10">
+        <div class="flex flex-col gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="section-kicker">Search results</p>
+            <h1 class="section-heading">Find your next watch</h1>
+            <p id="results-summary" class="mt-2 text-cinema-muted"></p>
+          </div>
+          <div id="pagination" class="flex gap-3"></div>
+        </div>
+        <div id="search-results" class="mt-8"></div>
+      </main>
+    </div>
+  </body>
+</html>
+
