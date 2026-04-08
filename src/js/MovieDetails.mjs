@@ -1,4 +1,5 @@
 import { formatDate, formatRating, formatRuntime, renderErrorState, renderLoadingState } from './utils.js';
+import MovieList from './MovieList.mjs';
 
 export default class MovieDetails {
   constructor(container, api, movieId) {
@@ -6,6 +7,7 @@ export default class MovieDetails {
     this.api = api;
     this.movieId = movieId;
     this.credits = [];
+    this.similarMovies = [];
   }
 
   async init() {
@@ -19,6 +21,7 @@ export default class MovieDetails {
     try {
       const movie = await this.api.getMovieDetails(this.movieId);
       this.credits = await this.loadCredits();
+      this.similarMovies = await this.loadSimilarMovies();
       document.title = `Movie Explorer | ${movie.title}`;
       this.render(movie);
     } catch (error) {
@@ -30,6 +33,15 @@ export default class MovieDetails {
     try {
       const credits = await this.api.getMovieCredits(this.movieId);
       return credits.cast?.slice(0, 8) || [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async loadSimilarMovies() {
+    try {
+      const movies = await this.api.getSimilarMovies(this.movieId);
+      return movies.slice(0, 6);
     } catch (error) {
       return [];
     }
@@ -75,6 +87,32 @@ export default class MovieDetails {
             )
             .join('')}
         </div>
+      </div>
+    `;
+  }
+
+  renderSimilarMoviesSection() {
+    if (!this.similarMovies.length) {
+      return `
+        <div class="detail-panel">
+          <h2 class="subsection-title">Similar Movies</h2>
+          <p class="mt-4 text-cinema-muted">
+            We could not find related titles for this movie right now.
+          </p>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="detail-panel xl:col-span-3">
+        <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="section-kicker">You might also like</p>
+            <h2 class="subsection-title">Similar Movies</h2>
+          </div>
+          <p class="text-sm text-cinema-muted">Picked from TMDB recommendations for this title.</p>
+        </div>
+        <div id="similar-movies" class="mt-6"></div>
       </div>
     `;
   }
@@ -150,14 +188,19 @@ export default class MovieDetails {
                 <h2 class="subsection-title">Trailer</h2>
                 <p class="mt-4 text-cinema-muted">Trailer playback is planned for Week 6 after the YouTube integration step.</p>
               </div>
-              <div class="detail-panel">
-                <h2 class="subsection-title">Similar Movies</h2>
-                <p class="mt-4 text-cinema-muted">Related movie recommendations are planned next after the Week 5 foundation is stable.</p>
-              </div>
+              ${this.renderSimilarMoviesSection()}
             </section>
           </div>
         </div>
       </section>
     `;
+
+    const similarMoviesContainer = this.container.querySelector('#similar-movies');
+    if (similarMoviesContainer && this.similarMovies.length) {
+      const similarMoviesList = new MovieList(similarMoviesContainer, this.api, {
+        emptyMessage: 'We could not find related titles for this movie right now.',
+      });
+      similarMoviesList.render(this.similarMovies);
+    }
   }
 }

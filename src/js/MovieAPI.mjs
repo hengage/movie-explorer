@@ -91,6 +91,11 @@ export default class MovieAPI {
     return request(`movie/${id}/credits`);
   }
 
+  async getSimilarMovies(id, page = 1) {
+    const data = await request(`movie/${id}/similar`, { page });
+    return data.results || [];
+  }
+
   async getGenres() {
     return request('genre/movie/list');
   }
