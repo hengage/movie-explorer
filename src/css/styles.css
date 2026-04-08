@@ -57,7 +57,7 @@
   }
 
   .primary-button {
-    @apply rounded-full bg-cinema-accent px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-cinema-bg transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cinema-accent/20;
+    @apply cursor-pointer rounded-full bg-cinema-accent px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-cinema-bg transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cinema-accent/20;
   }
 
   .state-card {
@@ -116,4 +116,5 @@
     @apply font-display text-2xl uppercase tracking-[0.12em];
   }
 }
+
 
