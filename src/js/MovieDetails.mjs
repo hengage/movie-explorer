@@ -5,6 +5,7 @@ export default class MovieDetails {
     this.container = container;
     this.api = api;
     this.movieId = movieId;
+    this.credits = [];
   }
 
   async init() {
@@ -17,11 +18,65 @@ export default class MovieDetails {
 
     try {
       const movie = await this.api.getMovieDetails(this.movieId);
+      this.credits = await this.loadCredits();
       document.title = `Movie Explorer | ${movie.title}`;
       this.render(movie);
     } catch (error) {
       renderErrorState(this.container, error.message);
     }
+  }
+
+  async loadCredits() {
+    try {
+      const credits = await this.api.getMovieCredits(this.movieId);
+      return credits.cast?.slice(0, 8) || [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  renderCastSection() {
+    if (!this.credits.length) {
+      return `
+        <div class="detail-panel">
+          <h2 class="subsection-title">Cast</h2>
+          <p class="mt-4 text-cinema-muted">
+            Cast details are unavailable for this title right now. Please try another movie.
+          </p>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="detail-panel xl:col-span-3">
+        <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="section-kicker">People in the story</p>
+            <h2 class="subsection-title">Top Cast</h2>
+          </div>
+          <p class="text-sm text-cinema-muted">Showing the first ${this.credits.length} cast members from TMDB.</p>
+        </div>
+        <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          ${this.credits
+            .map(
+              (person) => `
+                <article class="overflow-hidden rounded-[1.5rem] border border-white/8 bg-white/4">
+                  <img
+                    src="${this.api.buildProfileUrl(person.profile_path)}"
+                    alt="Profile photo for ${person.name}"
+                    class="aspect-[3/4] w-full object-cover bg-cinema-soft"
+                  />
+                  <div class="space-y-2 px-4 py-3">
+                    <h3 class="font-display text-2xl uppercase tracking-[0.08em]">${person.name}</h3>
+                    <p class="text-sm uppercase tracking-[0.16em] text-cinema-accent">${person.character || 'Character unavailable'}</p>
+                  </div>
+                </article>
+              `,
+            )
+            .join('')}
+        </div>
+      </div>
+    `;
   }
 
   render(movie) {
@@ -90,10 +145,7 @@ export default class MovieDetails {
             </section>
 
             <section class="grid gap-6 xl:grid-cols-3">
-              <div class="detail-panel">
-                <h2 class="subsection-title">Cast</h2>
-                <p class="mt-4 text-cinema-muted">Top cast display lands in Week 6. This section is reserved and wired into the detail page layout.</p>
-              </div>
+              ${this.renderCastSection()}
               <div class="detail-panel">
                 <h2 class="subsection-title">Trailer</h2>
                 <p class="mt-4 text-cinema-muted">Trailer playback is planned for Week 6 after the YouTube integration step.</p>

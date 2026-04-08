@@ -102,4 +102,8 @@ export default class MovieAPI {
   buildBackdropUrl(path, size = 'w1280') {
     return path ? `${imageBaseURL}${size}${path}` : '/placeholder-poster.svg';
   }
+
+  buildProfileUrl(path, size = 'w185') {
+    return path ? `${imageBaseURL}${size}${path}` : '/placeholder-poster.svg';
+  }
 }
