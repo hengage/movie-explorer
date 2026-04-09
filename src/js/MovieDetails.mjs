@@ -8,6 +8,7 @@ export default class MovieDetails {
     this.movieId = movieId;
     this.credits = [];
     this.similarMovies = [];
+    this.trailer = null;
   }
 
   async init() {
@@ -22,6 +23,7 @@ export default class MovieDetails {
       const movie = await this.api.getMovieDetails(this.movieId);
       this.credits = await this.loadCredits();
       this.similarMovies = await this.loadSimilarMovies();
+      this.trailer = await this.loadTrailer();
       document.title = `Movie Explorer | ${movie.title}`;
       this.render(movie);
     } catch (error) {
@@ -44,6 +46,28 @@ export default class MovieDetails {
       return movies.slice(0, 6);
     } catch (error) {
       return [];
+    }
+  }
+
+  async loadTrailer() {
+    try {
+      const videos = await this.api.getMovieVideos(this.movieId);
+
+      return (
+        videos.find(
+          (video) =>
+            video.site === 'YouTube' &&
+            video.type === 'Trailer' &&
+            video.official,
+        ) ||
+        videos.find(
+          (video) => video.site === 'YouTube' && video.type === 'Trailer',
+        ) ||
+        videos.find((video) => video.site === 'YouTube') ||
+        null
+      );
+    } catch (error) {
+      return null;
     }
   }
 
@@ -117,6 +141,47 @@ export default class MovieDetails {
     `;
   }
 
+  renderTrailerSection() {
+    if (!this.trailer?.key) {
+      return `
+        <div class="detail-panel">
+          <h2 class="subsection-title">Trailer</h2>
+          <p class="mt-4 text-cinema-muted">
+            A trailer is not available for this title right now.
+          </p>
+        </div>
+      `;
+    }
+
+    const trailerTitle = this.trailer.name || 'Official Trailer';
+    const embedUrl = `https://www.youtube.com/embed/${this.trailer.key}`;
+
+    return `
+      <div class="detail-panel xl:col-span-2">
+        <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="section-kicker">Watch before you commit</p>
+            <h2 class="subsection-title">Trailer</h2>
+          </div>
+          <p class="text-sm text-cinema-muted">${trailerTitle}</p>
+        </div>
+        <div class="mt-6 overflow-hidden rounded-[1.5rem] border border-white/8 bg-cinema-soft">
+          <div class="aspect-video">
+            <iframe
+              class="h-full w-full"
+              src="${embedUrl}"
+              title="${trailerTitle}"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
   render(movie) {
     const title = movie.title || 'Untitled movie';
     const poster = this.api.buildPosterUrl(movie.poster_path, 'w780');
@@ -184,10 +249,7 @@ export default class MovieDetails {
 
             <section class="grid gap-6 xl:grid-cols-3">
               ${this.renderCastSection()}
-              <div class="detail-panel">
-                <h2 class="subsection-title">Trailer</h2>
-                <p class="mt-4 text-cinema-muted">Trailer playback is planned for Week 6 after the YouTube integration step.</p>
-              </div>
+              ${this.renderTrailerSection()}
               ${this.renderSimilarMoviesSection()}
             </section>
           </div>
