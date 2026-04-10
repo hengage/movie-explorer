@@ -15,11 +15,14 @@
           <a href="/index.html" class="font-display text-3xl uppercase tracking-[0.2em] text-cinema-accent">
             Movie Explorer
           </a>
-          <form id="search-form" class="flex w-full max-w-3xl flex-col gap-3 sm:flex-row">
-            <label class="sr-only" for="query">Search for a movie</label>
-            <input id="query" name="query" type="search" placeholder="Search by movie title" class="search-input w-full sm:flex-1" required />
-            <button type="submit" class="primary-button sm:min-w-40">Search</button>
-          </form>
+          <div class="flex w-full max-w-4xl flex-col gap-4 md:flex-row md:items-center md:justify-end">
+            <form id="search-form" class="flex w-full max-w-3xl flex-col gap-3 sm:flex-row">
+              <label class="sr-only" for="query">Search for a movie</label>
+              <input id="query" name="query" type="search" placeholder="Search by movie title" class="search-input w-full sm:flex-1" required />
+              <button type="submit" class="primary-button sm:min-w-40">Search</button>
+            </form>
+            <a href="/favorites/index.html" class="section-link whitespace-nowrap">Favorites</a>
+          </div>
         </div>
       </header>
 

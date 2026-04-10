@@ -1,4 +1,12 @@
-import { formatDate, formatRating, formatRuntime, renderErrorState, renderLoadingState } from './utils.js';
+import {
+  formatDate,
+  formatRating,
+  formatRuntime,
+  isFavorite,
+  renderErrorState,
+  renderLoadingState,
+  toggleFavoriteMovie,
+} from './utils.js';
 import MovieList from './MovieList.mjs';
 
 export default class MovieDetails {
@@ -9,6 +17,7 @@ export default class MovieDetails {
     this.credits = [];
     this.similarMovies = [];
     this.trailer = null;
+    this.movie = null;
   }
 
   async init() {
@@ -21,6 +30,7 @@ export default class MovieDetails {
 
     try {
       const movie = await this.api.getMovieDetails(this.movieId);
+      this.movie = movie;
       this.credits = await this.loadCredits();
       this.similarMovies = await this.loadSimilarMovies();
       this.trailer = await this.loadTrailer();
@@ -213,6 +223,13 @@ export default class MovieDetails {
               <span class="detail-chip">Rating ${formatRating(movie.vote_average)}</span>
               <span class="detail-chip">${formatRuntime(movie.runtime)}</span>
             </div>
+            <button
+              id="favorite-toggle"
+              type="button"
+              class="primary-button mt-5 w-full"
+            >
+              ${isFavorite(movie.id) ? 'Remove from Favorites' : 'Save to Favorites'}
+            </button>
           </div>
 
           <div class="space-y-8">
@@ -263,6 +280,23 @@ export default class MovieDetails {
         emptyMessage: 'We could not find related titles for this movie right now.',
       });
       similarMoviesList.render(this.similarMovies);
+    }
+
+    const favoriteToggle = this.container.querySelector('#favorite-toggle');
+    if (favoriteToggle && this.movie) {
+      favoriteToggle.addEventListener('click', () => {
+        const nextState = toggleFavoriteMovie({
+          id: this.movie.id,
+          title: this.movie.title,
+          poster_path: this.movie.poster_path,
+          release_date: this.movie.release_date,
+          vote_average: this.movie.vote_average,
+        });
+
+        favoriteToggle.textContent = nextState
+          ? 'Remove from Favorites'
+          : 'Save to Favorites';
+      });
     }
   }
 }
