@@ -96,25 +96,27 @@ export default class MovieDetails {
     return `
       <div class="detail-panel xl:col-span-3">
         <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
-          <div>
+          <div class="min-w-0">
             <p class="section-kicker">People in the story</p>
             <h2 class="subsection-title">Top Cast</h2>
           </div>
-          <p class="text-sm text-cinema-muted">Showing the first ${this.credits.length} cast members from TMDB.</p>
+          <p class="max-w-full text-sm leading-6 text-cinema-muted sm:ml-6 sm:max-w-sm sm:text-right">
+            Showing the first ${this.credits.length} cast members from TMDB.
+          </p>
         </div>
-        <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           ${this.credits
             .map(
               (person) => `
-                <article class="overflow-hidden rounded-[1.5rem] border border-white/8 bg-white/4">
+                <article class="grid min-h-28 grid-cols-[96px_1fr] overflow-hidden rounded-[1.25rem] border border-white/8 bg-white/4 md:block md:rounded-[1.5rem]">
                   <img
                     src="${this.api.buildProfileUrl(person.profile_path)}"
                     alt="Profile photo for ${person.name}"
-                    class="aspect-[3/4] w-full object-cover bg-cinema-soft"
+                    class="h-full w-full object-cover bg-cinema-soft md:aspect-[3/4] md:h-auto"
                   />
-                  <div class="space-y-2 px-4 py-3">
-                    <h3 class="font-display text-2xl uppercase tracking-[0.08em]">${person.name}</h3>
-                    <p class="text-sm uppercase tracking-[0.16em] text-cinema-accent">${person.character || 'Character unavailable'}</p>
+                  <div class="flex flex-col justify-center space-y-2 px-3 py-3 sm:px-4">
+                    <h3 class="font-display text-xl uppercase tracking-[0.08em] sm:text-2xl">${person.name}</h3>
+                    <p class="text-xs uppercase tracking-[0.16em] text-cinema-accent sm:text-sm">${person.character || 'Character unavailable'}</p>
                   </div>
                 </article>
               `,
@@ -140,11 +142,13 @@ export default class MovieDetails {
     return `
       <div class="detail-panel xl:col-span-3">
         <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
-          <div>
+          <div class="min-w-0">
             <p class="section-kicker">You might also like</p>
             <h2 class="subsection-title">Similar Movies</h2>
           </div>
-          <p class="text-sm text-cinema-muted">Picked from TMDB recommendations for this title.</p>
+          <p class="max-w-full text-sm leading-6 text-cinema-muted sm:ml-6 sm:max-w-sm sm:text-right">
+            Picked from TMDB recommendations for this title.
+          </p>
         </div>
         <div id="similar-movies" class="mt-6"></div>
       </div>
@@ -169,16 +173,18 @@ export default class MovieDetails {
     return `
       <div class="detail-panel xl:col-span-2">
         <div class="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
-          <div>
+          <div class="min-w-0">
             <p class="section-kicker">Watch before you commit</p>
             <h2 class="subsection-title">Trailer</h2>
           </div>
-          <p class="text-sm text-cinema-muted">${trailerTitle}</p>
+          <p class="max-w-full text-sm leading-6 text-cinema-muted sm:ml-6 sm:max-w-sm sm:text-right">
+            ${trailerTitle}
+          </p>
         </div>
-        <div class="mt-6 overflow-hidden rounded-[1.5rem] border border-white/8 bg-cinema-soft">
-          <div class="aspect-video">
+        <div class="mx-auto mt-6 max-w-4xl overflow-hidden rounded-[1.5rem] border border-white/8 bg-cinema-soft">
+          <div class="relative w-full overflow-hidden" style="aspect-ratio: 16 / 9;">
             <iframe
-              class="h-full w-full"
+              class="absolute inset-0 h-full w-full"
               src="${embedUrl}"
               title="${trailerTitle}"
               loading="lazy"
@@ -202,20 +208,20 @@ export default class MovieDetails {
 
     this.container.innerHTML = `
       <section class="overflow-hidden rounded-[2rem] border border-white/10 bg-cinema-panel shadow-2xl shadow-black/30">
-        <div class="relative min-h-72 border-b border-white/10 bg-cinema-soft">
+        <div class="relative min-h-64 border-b border-white/10 bg-cinema-soft sm:min-h-72">
           <img src="${backdrop}" alt="Backdrop for ${title}" class="absolute inset-0 h-full w-full object-cover opacity-25" />
           <div class="absolute inset-0 bg-gradient-to-t from-cinema-panel via-cinema-panel/85 to-black/20"></div>
-          <div class="relative flex h-full items-end px-6 py-10 sm:px-10">
+          <div class="relative flex h-full items-end px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
             <div>
               <p class="section-kicker">Movie detail</p>
-              <h1 class="mt-3 max-w-4xl font-display text-5xl uppercase leading-none tracking-[0.08em] sm:text-6xl">${title}</h1>
-              <p class="mt-4 max-w-3xl text-cinema-muted">${movie.tagline || 'Everything you need to decide if this should be your next watch.'}</p>
+              <h1 class="mt-3 max-w-4xl font-display text-4xl uppercase leading-none tracking-[0.08em] sm:text-5xl lg:text-6xl">${title}</h1>
+              <p class="mt-4 max-w-3xl text-sm text-cinema-muted sm:text-base">${movie.tagline || 'Everything you need to decide if this should be your next watch.'}</p>
             </div>
           </div>
         </div>
 
-        <div class="grid gap-8 p-6 lg:grid-cols-[320px_1fr] lg:p-10">
-          <div class="detail-panel self-start">
+        <div class="grid gap-6 p-4 sm:gap-8 sm:p-6 xl:grid-cols-[320px_1fr] xl:p-10">
+          <div class="detail-panel mx-auto w-full max-w-sm self-start xl:mx-0 xl:max-w-none">
             <div class="overflow-hidden rounded-[1.5rem] bg-cinema-soft">
               <img src="${poster}" alt="Poster for ${title}" class="aspect-[2/3] w-full object-cover" />
             </div>
@@ -234,7 +240,7 @@ export default class MovieDetails {
 
           <div class="space-y-8">
             <section class="detail-panel">
-              <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <div class="grid gap-4 sm:grid-cols-2 2xl:grid-cols-4">
                 <div>
                   <p class="text-sm uppercase tracking-[0.18em] text-cinema-muted">Release Date</p>
                   <p class="mt-2 text-lg font-semibold">${formatDate(movie.release_date)}</p>
@@ -264,7 +270,7 @@ export default class MovieDetails {
               <div class="mt-4 flex flex-wrap gap-3">${genres}</div>
             </section>
 
-            <section class="grid gap-6 xl:grid-cols-3">
+            <section class="grid gap-6 2xl:grid-cols-3">
               ${this.renderCastSection()}
               ${this.renderTrailerSection()}
               ${this.renderSimilarMoviesSection()}

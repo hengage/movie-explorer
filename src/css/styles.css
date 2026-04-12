@@ -33,7 +33,7 @@
 
 @layer components {
   .page-shell {
-    @apply mx-auto max-w-7xl px-6;
+    @apply mx-auto max-w-7xl px-4 sm:px-6;
   }
 
   .section-heading-wrap {
@@ -45,7 +45,7 @@
   }
 
   .section-heading {
-    @apply font-display text-4xl uppercase tracking-[0.12em] sm:text-5xl;
+    @apply font-display text-3xl uppercase tracking-[0.12em] sm:text-4xl lg:text-5xl;
   }
 
   .section-link {
@@ -66,6 +66,10 @@
 
   .movie-row {
     @apply flex gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    touch-action: pan-x;
   }
 
   .movie-grid {
@@ -73,7 +77,8 @@
   }
 
   .movie-card {
-    @apply relative w-[18rem] shrink-0 overflow-hidden rounded-[1.25rem] border border-white/8 bg-cinema-panel shadow-xl shadow-black/20 transition duration-300 hover:-translate-y-1.5 hover:scale-[1.02] hover:border-cinema-accent/40;
+    @apply relative w-[15.5rem] shrink-0 overflow-hidden rounded-[1.25rem] border border-white/8 bg-cinema-panel shadow-xl shadow-black/20 transition duration-300 hover:-translate-y-1.5 hover:scale-[1.02] hover:border-cinema-accent/40 sm:w-[18rem];
+    scroll-snap-align: start;
   }
 
   .movie-card-grid {
@@ -93,11 +98,11 @@
   }
 
   .movie-card-body {
-    @apply flex min-h-36 flex-col gap-3 p-5;
+    @apply flex min-h-32 flex-col gap-3 p-4 sm:min-h-36 sm:p-5;
   }
 
   .movie-card-title {
-    @apply line-clamp-2 font-display text-2xl uppercase leading-tight tracking-[0.08em];
+    @apply line-clamp-2 font-display text-xl uppercase leading-tight tracking-[0.08em] sm:text-2xl;
   }
 
   .movie-card-meta {
@@ -105,7 +110,7 @@
   }
 
   .detail-panel {
-    @apply rounded-[2rem] border border-white/10 bg-cinema-panel/85 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm;
+    @apply rounded-[1.5rem] border border-white/10 bg-cinema-panel/85 p-4 shadow-2xl shadow-black/30 backdrop-blur-sm sm:rounded-[2rem] sm:p-6;
   }
 
   .detail-chip {
