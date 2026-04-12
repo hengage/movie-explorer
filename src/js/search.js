@@ -1,5 +1,6 @@
 import MovieAPI from './MovieAPI.mjs';
 import MovieList from './MovieList.mjs';
+import { renderSiteHeader } from './siteHeader.js';
 import {
   buildSearchUrl,
   getParam,
@@ -12,15 +13,18 @@ import {
 const api = new MovieAPI();
 const query = getParam('q') || '';
 const page = Number(getParam('page') || 1);
+
+renderSiteHeader({
+  activePage: 'search',
+  showSearch: true,
+  searchValue: query,
+});
+
 const resultsContainer = document.querySelector('#search-results');
 const summary = document.querySelector('#results-summary');
 const pagination = document.querySelector('#pagination');
 const form = document.querySelector('#search-form');
 const input = document.querySelector('#query');
-
-if (input) {
-  input.value = query;
-}
 
 if (form) {
   form.addEventListener('submit', (event) => {

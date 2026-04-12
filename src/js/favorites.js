@@ -1,9 +1,12 @@
 import MovieAPI from './MovieAPI.mjs';
 import MovieList from './MovieList.mjs';
 import { getFavorites, renderEmptyState } from './utils.js';
+import { renderSiteHeader } from './siteHeader.js';
 
 const favoritesContainer = document.querySelector('#favorites-results');
 const api = new MovieAPI();
+
+renderSiteHeader({ activePage: 'favorites' });
 
 if (favoritesContainer) {
   const favorites = getFavorites();

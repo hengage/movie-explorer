@@ -1,8 +1,11 @@
 import MovieAPI from './MovieAPI.mjs';
 import MovieList from './MovieList.mjs';
+import { renderSiteHeader } from './siteHeader.js';
 import { buildSearchUrl, renderErrorState, renderLoadingState } from './utils.js';
 
 const api = new MovieAPI();
+
+renderSiteHeader({ activePage: 'home' });
 
 function setupSearch(formSelector, inputSelector) {
   const form = document.querySelector(formSelector);
