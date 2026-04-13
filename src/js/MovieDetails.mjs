@@ -233,6 +233,7 @@ export default class MovieDetails {
               id="favorite-toggle"
               type="button"
               class="primary-button mt-5 w-full"
+              aria-pressed="${isFavorite(movie.id) ? 'true' : 'false'}"
             >
               ${isFavorite(movie.id) ? 'Remove from Favorites' : 'Save to Favorites'}
             </button>
@@ -302,6 +303,7 @@ export default class MovieDetails {
         favoriteToggle.textContent = nextState
           ? 'Remove from Favorites'
           : 'Save to Favorites';
+        favoriteToggle.setAttribute('aria-pressed', nextState ? 'true' : 'false');
       });
     }
   }

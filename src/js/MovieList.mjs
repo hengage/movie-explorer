@@ -29,9 +29,10 @@ export default class MovieList {
     const poster = this.api.buildPosterUrl(movie.poster_path);
     const year = formatReleaseYear(movie.release_date);
     const rating = formatRating(movie.vote_average);
+    const cardLabel = `Open details for ${title}. Released ${year}. Rating ${rating}.`;
 
     return `
-      <a class="movie-card${cardModifier}" href="${buildMovieUrl(movie.id)}">
+      <a class="movie-card${cardModifier}" href="${buildMovieUrl(movie.id)}" aria-label="${cardLabel}">
         <div class="movie-poster-wrap">
           <img class="movie-poster" src="${poster}" alt="Poster for ${title}" loading="lazy" />
           <span class="rating-badge">${rating}</span>

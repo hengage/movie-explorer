@@ -42,13 +42,13 @@ function renderPagination(currentPage, totalPages) {
   const nextDisabled = currentPage >= totalPages;
 
   pagination.innerHTML = `
-    <button ${previousDisabled ? 'disabled' : ''} data-page="${currentPage - 1}" class="primary-button ${previousDisabled ? 'cursor-not-allowed opacity-40 hover:translate-y-0 hover:shadow-none' : ''}">
+    <button ${previousDisabled ? 'disabled' : ''} aria-label="Go to previous search results page" data-page="${currentPage - 1}" class="primary-button ${previousDisabled ? 'cursor-not-allowed opacity-40 hover:translate-y-0 hover:shadow-none' : ''}">
       Previous
     </button>
     <span class="inline-flex items-center rounded-full border border-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-cinema-muted">
       Page ${currentPage} of ${totalPages || 1}
     </span>
-    <button ${nextDisabled ? 'disabled' : ''} data-page="${currentPage + 1}" class="primary-button ${nextDisabled ? 'cursor-not-allowed opacity-40 hover:translate-y-0 hover:shadow-none' : ''}">
+    <button ${nextDisabled ? 'disabled' : ''} aria-label="Go to next search results page" data-page="${currentPage + 1}" class="primary-button ${nextDisabled ? 'cursor-not-allowed opacity-40 hover:translate-y-0 hover:shadow-none' : ''}">
       Next
     </button>
   `;

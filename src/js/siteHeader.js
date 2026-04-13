@@ -41,7 +41,7 @@ export function renderSiteHeader({
   const searchMarkup = showSearch
     ? `
       <div class="site-header-search-shell">
-        <form id="search-form" class="flex w-full flex-col gap-3 sm:flex-row">
+        <form id="search-form" role="search" class="flex w-full flex-col gap-3 sm:flex-row">
           <label class="sr-only" for="query">Search for a movie</label>
           <input
             id="query"
@@ -61,8 +61,8 @@ export function renderSiteHeader({
   header.innerHTML = `
     <div class="site-header-inner">
       <div class="site-header-main">
-        <a href="/index.html" class="site-brand">Movie Explorer</a>
-        <nav class="site-nav">
+        <a href="/index.html" class="site-brand" aria-label="Movie Explorer home">Movie Explorer</a>
+        <nav class="site-nav" aria-label="Primary">
           ${renderNavLinks(activePage)}
         </nav>
       </div>

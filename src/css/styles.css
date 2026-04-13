@@ -49,19 +49,19 @@
   }
 
   .site-brand {
-    @apply font-display text-center text-2xl uppercase tracking-[0.16em] text-cinema-accent sm:text-3xl md:text-left md:tracking-[0.2em];
+    @apply font-display text-center text-2xl uppercase tracking-[0.16em] text-cinema-accent transition focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cinema-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cinema-bg sm:text-3xl md:text-left md:tracking-[0.2em];
   }
 
   .site-nav {
-    @apply flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-medium text-cinema-muted md:justify-end;
+    @apply flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm font-semibold md:justify-end;
   }
 
   .site-nav-link {
-    @apply transition hover:text-cinema-text;
+    @apply rounded-full border border-transparent px-3 py-1.5 text-cinema-text/75 transition hover:border-white/10 hover:bg-white/5 hover:text-cinema-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cinema-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cinema-bg;
   }
 
   .site-nav-link-active {
-    @apply text-cinema-text;
+    @apply border-cinema-accent/30 bg-cinema-accent text-cinema-bg shadow-lg shadow-cinema-accent/15 hover:border-cinema-accent/30 hover:bg-cinema-accent hover:text-cinema-bg;
   }
 
   .page-shell {
@@ -81,15 +81,15 @@
   }
 
   .section-link {
-    @apply text-sm font-semibold uppercase tracking-[0.18em] text-cinema-muted transition hover:text-cinema-text;
+    @apply rounded-md text-sm font-semibold uppercase tracking-[0.18em] text-cinema-muted transition hover:text-cinema-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cinema-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cinema-bg;
   }
 
   .search-input {
-    @apply rounded-full border border-white/10 bg-white/5 px-5 py-3.5 text-base text-cinema-text outline-none ring-0 placeholder:text-cinema-muted/70 focus:border-cinema-accent focus:bg-white/8;
+    @apply rounded-full border border-white/10 bg-white/5 px-5 py-3.5 text-base text-cinema-text outline-none ring-0 placeholder:text-cinema-muted/70 focus:border-cinema-accent focus:bg-white/8 focus-visible:ring-2 focus-visible:ring-cinema-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cinema-bg;
   }
 
   .primary-button {
-    @apply cursor-pointer rounded-full bg-cinema-accent px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-cinema-bg transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cinema-accent/20;
+    @apply cursor-pointer rounded-full bg-cinema-accent px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-cinema-bg transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cinema-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cinema-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cinema-bg;
   }
 
   .state-card {
@@ -109,7 +109,7 @@
   }
 
   .movie-card {
-    @apply relative w-[15.5rem] shrink-0 overflow-hidden rounded-[1.25rem] border border-white/8 bg-cinema-panel shadow-xl shadow-black/20 transition duration-300 hover:-translate-y-1.5 hover:scale-[1.02] hover:border-cinema-accent/40 sm:w-[18rem];
+    @apply relative w-[15.5rem] shrink-0 overflow-hidden rounded-[1.25rem] border border-white/8 bg-cinema-panel shadow-xl shadow-black/20 transition duration-300 hover:-translate-y-1.5 hover:scale-[1.02] hover:border-cinema-accent/40 focus-visible:-translate-y-1.5 focus-visible:scale-[1.02] focus-visible:border-cinema-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cinema-accent focus-visible:ring-offset-2 focus-visible:ring-offset-cinema-bg sm:w-[18rem];
     scroll-snap-align: start;
   }
 
