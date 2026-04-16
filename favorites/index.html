@@ -3,31 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie Explorer | Search</title>
-    <meta name="description" content="Search Movie Explorer and compare matching movie results." />
+    <title>Movie Explorer | Favorites</title>
+    <meta
+      name="description"
+      content="View the movies you saved to your Movie Explorer favorites list."
+    />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#111318" />
-    <link rel="canonical" href="https://movie-explorer-wdd330.onrender.com/search/index.html" />
+    <link rel="canonical" href="https://movie-explorer-wdd330.onrender.com/favorites/index.html" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Movie Explorer" />
-    <meta property="og:title" content="Movie Explorer | Search" />
-    <meta property="og:description" content="Search Movie Explorer and compare matching movie results." />
-    <meta property="og:url" content="https://movie-explorer-wdd330.onrender.com/search/index.html" />
+    <meta property="og:title" content="Movie Explorer | Favorites" />
+    <meta
+      property="og:description"
+      content="View the movies you saved to your Movie Explorer favorites list."
+    />
+    <meta property="og:url" content="https://movie-explorer-wdd330.onrender.com/favorites/index.html" />
     <meta
       property="og:image"
       content="https://movie-explorer-wdd330.onrender.com/placeholder-poster.svg"
     />
     <meta property="og:image:alt" content="Movie Explorer poster placeholder graphic" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Movie Explorer | Search" />
-    <meta name="twitter:description" content="Search Movie Explorer and compare matching movie results." />
+    <meta name="twitter:title" content="Movie Explorer | Favorites" />
+    <meta
+      name="twitter:description"
+      content="View the movies you saved to your Movie Explorer favorites list."
+    />
     <meta
       name="twitter:image"
       content="https://movie-explorer-wdd330.onrender.com/placeholder-poster.svg"
     />
     <link rel="stylesheet" href="/src/css/styles.css" />
-    <script type="module" src="/src/js/search.js"></script>
+    <script type="module" src="/src/js/favorites.js"></script>
   </head>
   <body>
     <div class="min-h-screen bg-cinema-bg text-cinema-text">
@@ -36,15 +45,15 @@
       <main class="page-shell py-10">
         <div class="flex flex-col gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p class="section-kicker">Search results</p>
-            <h1 class="section-heading">Find your next watch</h1>
-            <p id="results-summary" class="mt-2 text-cinema-muted" aria-live="polite"></p>
+            <p class="section-kicker">Saved for later</p>
+            <h1 class="section-heading">Favorites</h1>
+            <p class="mt-2 text-cinema-muted">
+              Keep track of the titles you want to come back to.
+            </p>
           </div>
-          <div id="pagination" class="flex gap-3"></div>
         </div>
-        <div id="search-results" class="mt-8"></div>
+        <div id="favorites-results" class="mt-8"></div>
       </main>
     </div>
   </body>
 </html>
-

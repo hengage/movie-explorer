@@ -8,21 +8,39 @@
       name="description"
       content="Search for movies, compare what to watch, and explore details in one cinematic experience."
     />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#111318" />
+    <link rel="canonical" href="https://movie-explorer-wdd330.onrender.com/index.html" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Movie Explorer" />
+    <meta property="og:title" content="Movie Explorer" />
+    <meta
+      property="og:description"
+      content="Search for movies, compare what to watch, and explore details in one cinematic experience."
+    />
+    <meta property="og:url" content="https://movie-explorer-wdd330.onrender.com/index.html" />
+    <meta
+      property="og:image"
+      content="https://movie-explorer-wdd330.onrender.com/placeholder-poster.svg"
+    />
+    <meta property="og:image:alt" content="Movie Explorer poster placeholder graphic" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Movie Explorer" />
+    <meta
+      name="twitter:description"
+      content="Search for movies, compare what to watch, and explore details in one cinematic experience."
+    />
+    <meta
+      name="twitter:image"
+      content="https://movie-explorer-wdd330.onrender.com/placeholder-poster.svg"
+    />
     <link rel="stylesheet" href="/src/css/styles.css" />
     <script type="module" src="/src/js/main.js"></script>
   </head>
   <body>
     <div class="min-h-screen bg-cinema-bg text-cinema-text">
-      <header class="border-b border-white/10 bg-black/30 backdrop-blur-sm">
-        <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
-          <a href="/index.html" class="font-display text-3xl uppercase tracking-[0.2em] text-cinema-accent">
-            Movie Explorer
-          </a>
-          <nav class="text-sm font-medium text-cinema-muted">
-            <a href="/search/index.html" class="transition hover:text-cinema-text">Search</a>
-          </nav>
-        </div>
-      </header>
+      <header id="site-header" class="site-header"></header>
 
       <main>
         <section class="relative overflow-hidden border-b border-white/10">
@@ -36,7 +54,7 @@
               <p class="max-w-2xl text-lg leading-8 text-cinema-muted sm:text-xl">
                 Discover what is worth watching with one clean destination for search, ratings, release details, and rich movie context.
               </p>
-              <form id="hero-search-form" class="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <form id="hero-search-form" role="search" class="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <label class="sr-only" for="hero-query">Search for a movie</label>
                 <input
                   id="hero-query"

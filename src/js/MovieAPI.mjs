@@ -91,6 +91,16 @@ export default class MovieAPI {
     return request(`movie/${id}/credits`);
   }
 
+  async getMovieVideos(id) {
+    const data = await request(`movie/${id}/videos`);
+    return data.results || [];
+  }
+
+  async getSimilarMovies(id, page = 1) {
+    const data = await request(`movie/${id}/similar`, { page });
+    return data.results || [];
+  }
+
   async getGenres() {
     return request('genre/movie/list');
   }
@@ -100,6 +110,10 @@ export default class MovieAPI {
   }
 
   buildBackdropUrl(path, size = 'w1280') {
+    return path ? `${imageBaseURL}${size}${path}` : '/placeholder-poster.svg';
+  }
+
+  buildProfileUrl(path, size = 'w185') {
     return path ? `${imageBaseURL}${size}${path}` : '/placeholder-poster.svg';
   }
 }

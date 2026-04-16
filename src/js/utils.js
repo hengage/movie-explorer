@@ -63,6 +63,35 @@ export function formatDate(dateString) {
   }).format(new Date(dateString));
 }
 
+export function getFavorites() {
+  return JSON.parse(localStorage.getItem('movie-explorer-favorites')) || [];
+}
+
+export function saveFavorites(favorites) {
+  localStorage.setItem('movie-explorer-favorites', JSON.stringify(favorites));
+}
+
+export function isFavorite(movieId) {
+  return getFavorites().some((movie) => String(movie.id) === String(movieId));
+}
+
+export function toggleFavoriteMovie(movie) {
+  const favorites = getFavorites();
+  const existingIndex = favorites.findIndex(
+    (favorite) => String(favorite.id) === String(movie.id),
+  );
+
+  if (existingIndex >= 0) {
+    favorites.splice(existingIndex, 1);
+    saveFavorites(favorites);
+    return false;
+  }
+
+  favorites.push(movie);
+  saveFavorites(favorites);
+  return true;
+}
+
 export function renderLoadingState(container, message = 'Loading movies...') {
   container.innerHTML = `<div class="state-card">${message}</div>`;
 }
