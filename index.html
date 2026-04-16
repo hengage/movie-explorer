@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,10 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#111318" />
-    <link rel="canonical" href="https://movie-explorer-wdd330.onrender.com/index.html" />
+    <link
+      rel="canonical"
+      href="https://movie-explorer-wdd330.onrender.com/index.html"
+    />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Movie Explorer" />
@@ -19,12 +22,18 @@
       property="og:description"
       content="Search for movies, compare what to watch, and explore details in one cinematic experience."
     />
-    <meta property="og:url" content="https://movie-explorer-wdd330.onrender.com/index.html" />
+    <meta
+      property="og:url"
+      content="https://movie-explorer-wdd330.onrender.com/index.html"
+    />
     <meta
       property="og:image"
       content="https://movie-explorer-wdd330.onrender.com/placeholder-poster.svg"
     />
-    <meta property="og:image:alt" content="Movie Explorer poster placeholder graphic" />
+    <meta
+      property="og:image:alt"
+      content="Movie Explorer poster placeholder graphic"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Movie Explorer" />
     <meta
@@ -44,18 +53,37 @@
 
       <main>
         <section class="relative overflow-hidden border-b border-white/10">
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(212,162,76,0.22),_transparent_40%),linear-gradient(135deg,_rgba(196,69,54,0.12),_transparent_50%)]"></div>
-          <div class="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:py-24">
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(212,162,76,0.22),_transparent_40%),linear-gradient(135deg,_rgba(196,69,54,0.12),_transparent_50%)]"
+          ></div>
+          <div
+            class="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:py-24"
+          >
             <div class="space-y-6">
-              <p class="text-sm font-semibold uppercase tracking-[0.35em] text-cinema-accent">Your next movie night starts here</p>
-              <h1 class="font-display text-5xl leading-none uppercase tracking-[0.08em] sm:text-6xl lg:text-7xl">
+              <p
+                class="text-sm font-semibold uppercase tracking-[0.35em] text-cinema-accent"
+              >
+                Your next movie night starts here
+              </p>
+              <h1
+                class="font-display text-5xl leading-none uppercase tracking-[0.08em] sm:text-6xl lg:text-7xl"
+              >
                 Search less. Choose faster.
               </h1>
-              <p class="max-w-2xl text-lg leading-8 text-cinema-muted sm:text-xl">
-                Discover what is worth watching with one clean destination for search, ratings, release details, and rich movie context.
+              <p
+                class="max-w-2xl text-lg leading-8 text-cinema-muted sm:text-xl"
+              >
+                Discover what is worth watching with one clean destination for
+                search, ratings, release details, and rich movie context.
               </p>
-              <form id="hero-search-form" role="search" class="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <label class="sr-only" for="hero-query">Search for a movie</label>
+              <form
+                id="hero-search-form"
+                role="search"
+                class="flex flex-col gap-3 sm:flex-row sm:items-center"
+              >
+                <label class="sr-only" for="hero-query"
+                  >Search for a movie</label
+                >
                 <input
                   id="hero-query"
                   name="query"
@@ -64,18 +92,30 @@
                   class="search-input w-full sm:flex-1"
                   required
                 />
-                <button type="submit" class="primary-button sm:min-w-44">Search Movies</button>
+                <button type="submit" class="primary-button sm:min-w-44">
+                  Search Movies
+                </button>
               </form>
             </div>
-            <div class="rounded-3xl border border-white/10 bg-cinema-panel/70 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm">
+            <div
+              class="rounded-3xl border border-white/10 bg-cinema-panel/70 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm"
+            >
               <div class="flex items-center justify-between">
-                <h2 class="font-display text-2xl uppercase tracking-[0.12em]">What you get</h2>
-                <span class="rounded-full border border-cinema-accent/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-cinema-accent">Week 5 MVP</span>
+                <h2 class="font-display text-2xl uppercase tracking-[0.12em]">
+                  What you get
+                </h2>
               </div>
               <ul class="mt-6 space-y-4 text-cinema-muted">
-                <li class="rounded-2xl border border-white/6 bg-white/3 p-4">Live movie search and URL-driven results pages</li>
-                <li class="rounded-2xl border border-white/6 bg-white/3 p-4">Curated Now Playing, Popular, and Top Rated discovery rows</li>
-                <li class="rounded-2xl border border-white/6 bg-white/3 p-4">Detail pages with release year, runtime, genres, overview, and score</li>
+                <li class="rounded-2xl border border-white/6 bg-white/3 p-4">
+                  Live movie search and URL-driven results pages
+                </li>
+                <li class="rounded-2xl border border-white/6 bg-white/3 p-4">
+                  Curated Now Playing, Popular, and Top Rated discovery rows
+                </li>
+                <li class="rounded-2xl border border-white/6 bg-white/3 p-4">
+                  Detail pages with release year, runtime, genres, overview, and
+                  score
+                </li>
               </ul>
             </div>
           </div>
@@ -89,7 +129,11 @@
                   <p class="section-kicker">Fresh picks</p>
                   <h2 class="section-heading">Now Playing</h2>
                 </div>
-                <a href="/search/index.html?q=now%20playing" class="section-link">Explore more</a>
+                <a
+                  href="/search/index.html?q=now%20playing"
+                  class="section-link"
+                  >Explore more</a
+                >
               </div>
               <div id="now-playing" class="mt-6"></div>
             </section>
@@ -100,7 +144,9 @@
                   <p class="section-kicker">Popular right now</p>
                   <h2 class="section-heading">Popular</h2>
                 </div>
-                <a href="/search/index.html?q=popular" class="section-link">Explore more</a>
+                <a href="/search/index.html?q=popular" class="section-link"
+                  >Explore more</a
+                >
               </div>
               <div id="popular" class="mt-6"></div>
             </section>
@@ -111,7 +157,9 @@
                   <p class="section-kicker">Critics and audiences</p>
                   <h2 class="section-heading">Top Rated</h2>
                 </div>
-                <a href="/search/index.html?q=top%20rated" class="section-link">Explore more</a>
+                <a href="/search/index.html?q=top%20rated" class="section-link"
+                  >Explore more</a
+                >
               </div>
               <div id="top-rated" class="mt-6"></div>
             </section>
@@ -121,4 +169,3 @@
     </div>
   </body>
 </html>
-
